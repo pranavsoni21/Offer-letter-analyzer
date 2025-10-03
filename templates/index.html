@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="form-card">
+        <h1>Job Offer Analyzer</h1>
+        <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" name="job_title" placeholder="e.g. Software Engineer" required>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" placeholder="e.g. New York, NY" required>
+            </div>
+
+            <div class="form-group">
+                <label>CTC (Annual)</label>
+                <input type="number" name="ctc" placeholder="Enter amount in your currency" required>
+            </div>
+
+            <div class="form-group">
+                <label>Deductions</label>
+                <input type="number" name="deductions" placeholder="Enter total deductions" required>
+            </div>
+
+            <div class="form-group">
+                <label>Notice Period (days)</label>
+                <input type="number" name="notice_period" placeholder="e.g. 30, 60, 90" required>
+            </div>
+
+            <div class="form-group">
+                <label>Benefits</label>
+                <div class="benefits-group">
+                    <div class="benefit-item">
+                        <input type="checkbox" name="benefits" value="health_insurance" id="health">
+                        <label for="health">Health Insurance</label>
+                    </div>
+                    <div class="benefit-item">
+                        <input type="checkbox" name="benefits" value="retirement_plan" id="retirement">
+                        <label for="retirement">Retirement Plan</label>
+                    </div>
+                    <div class="benefit-item">
+                        <input type="checkbox" name="benefits" value="life_insurance" id="life">
+                        <label for="life">Life Insurance</label>
+                    </div>
+                    <div class="benefit-item">
+                        <input type="checkbox" name="benefits" value="stock_options" id="stock">
+                        <label for="stock">Stock Options</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Analyze Offer</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

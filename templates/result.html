@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="result">
+    <h2>Recommendation: {{ result.decision }}</h2>
+
+     <!-- User Input Summary -->
+    <div class="user-input-summary">
+        <h3>Your Offer Details:</h3>
+        <ul>
+            <li>Job Title: {{ job_title }}</li>
+            <li>Location: {{ location }}</li>
+            <li>Offered CTC: {{ ctc }}</li>
+            <li>Deductions: {{ deductions }}</li>
+            <li>Notice Period: {{ notice_period }} days</li>
+            <li>Benefits:
+                <ul>
+                {% for benefit in benefits %}
+                    <li>{{ benefit }}</li>
+                {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Market Comparison -->
+    <div class="market-comparison">
+        <h3>Market Salary Information:</h3>
+        {% if result.market_salary %}
+            <p>Market Median Salary: {{ result.market_salary['median_salary'] }}</p>
+            <p>Salary Range: {{ result.market_salary['min_salary'] }} -
+                           {{ result.market_salary['max_salary'] }}</p>
+            <p>Period: {{ result.market_salary['period'] }}</p>
+        {% else %}
+            <p>Market salary data not available</p>
+        {% endif %}
+    </div>
+    <div class="explanation">
+        <p>{{ result.explanation }}</p>
+    </div>
+
+    {% if result.market_data %}
+    <div class="market-data">
+        <h3>Market Salary Information</h3>
+        <p>Market Range: {{ result.market_data.currency }} {{ "{:,.2f}".format(result.market_data.min_salary) }} -
+           {{ "{:,.2f}".format(result.market_data.max_salary) }} per {{ result.market_data.period.lower() }}</p>
+    </div>
+    {% endif %}
+
+    <div class="analysis">
+        {% if result.pros %}
+        <h3>Positive Aspects</h3>
+        <ul class="pros">
+            {% for pro in result.pros %}
+            <li>{{ pro }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if result.cons %}
+        <h3>Areas of Concern</h3>
+        <ul class="cons">
+            {% for con in result.cons %}
+            <li>{{ con }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if result.recommendations %}
+        <h3>Recommended Actions</h3>
+        <ul class="recommendations">
+            {% for recommendation in result.recommendations %}
+            <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('index') }}" class="button">Analyze Another Offer</a>
+</div>
+{% endblock %}
