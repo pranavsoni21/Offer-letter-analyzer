@@ -46,7 +46,7 @@ def get_market_salary(job_title, location):
         # Convert to INR if needed
         if salary_info["salary_currency"] != "INR":
             # Assuming USD to INR conversion (you may want to use a real-time forex API)
-            conversion_rate = 83  # Example USD to INR rate
+            conversion_rate = 90  # Example USD to INR rate
             return {
                     "median_salary": salary_info["median_salary"] * conversion_rate,
                     "min_salary": salary_info["min_salary"] * conversion_rate,
